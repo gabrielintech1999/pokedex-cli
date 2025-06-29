@@ -13,15 +13,38 @@ func main() {
 
   scanner := bufio.NewScanner(os.Stdin)
   fmt.Println("Basic Pokedex-cli [press exit to terminate]")
-  fmt.Print(">>> ")
+  
 
-  scanner.Scan()
 
-  text := scanner.Text()
+  for {
 
-  cleanedInput := clearInput(text)
-   
-  fmt.Println("Echoing: ", cleanedInput)
+    fmt.Print(">>> ")
+
+    scanner.Scan()
+
+    text := scanner.Text()
+
+    cleanedInput := clearInput(text)[0]
+
+    if len(cleanedInput) == 0 {
+      continue
+    }
+
+    switch cleanedInput {
+    case "exit":
+       fmt.Println("Teminating the program")
+
+       os.Exit(0)
+    
+    case "help":
+       fmt.Println("Echoing: ", cleanedInput[0])
+    default: 
+        fmt.Println("Invalid input")
+    }
+    
+
+
+  }
   
 }
 
